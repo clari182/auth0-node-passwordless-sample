@@ -1,7 +1,7 @@
 extends layout
 
 block scripts
-  script(src='https://cdn.auth0.com/js/lock-passwordless-2.2.3.min.js')
+  script(src='https://325-22887863-gh.circle-artifacts.com/0/home/ubuntu/lock/build/lock.min.js')
   
 block content
   .row
@@ -29,16 +29,39 @@ block content
   script.
 
     function loginSMS() {
-      var lock = new Auth0LockPasswordless('#{env.AUTH0_CLIENT_ID}', '#{env.AUTH0_DOMAIN}');
-      lock.sms( {callbackURL: '#{env.AUTH0_CALLBACK_URL}'} );
+      var lock = new Auth0LockPasswordless('#{env.AUTH0_CLIENT_ID}', '#{env.AUTH0_DOMAIN}', {
+        oidcConformant: true,
+        allowedConnections: ['sms'],
+        auth: {
+          redirectUrl: '#{env.AUTH0_CALLBACK_URL}',
+          responseType: 'code'
+        }
+      });
+      lock.show();
     }
 
     function loginEmailCode() {
-      var lock = new Auth0LockPasswordless('#{env.AUTH0_CLIENT_ID}', '#{env.AUTH0_DOMAIN}');
-      lock.emailcode( {callbackURL: '#{env.AUTH0_CALLBACK_URL}'} );
+      var lock = new Auth0LockPasswordless('#{env.AUTH0_CLIENT_ID}', '#{env.AUTH0_DOMAIN}', {
+        oidcConformant: true,
+        allowedConnections: ['email', 'acme'],
+        passwordlessMethod: 'code',
+        auth: {
+          redirectUrl: '#{env.AUTH0_CALLBACK_URL}',
+          responseType: 'code'
+        }
+      });
+      lock.show();
     }
 
     function loginEmailLink() {
-      var lock = new Auth0LockPasswordless('#{env.AUTH0_CLIENT_ID}', '#{env.AUTH0_DOMAIN}');
-      lock.magiclink( {callbackURL: '#{env.AUTH0_CALLBACK_URL}'} );
+      var lock = new Auth0LockPasswordless('#{env.AUTH0_CLIENT_ID}', '#{env.AUTH0_DOMAIN}', {
+        oidcConformant: true,
+        allowedConnections: ['email', 'acme'],
+        passwordlessMethod: 'link',
+        auth: {
+          redirectUrl: '#{env.AUTH0_CALLBACK_URL}',
+          responseType: 'code'
+        }
+      });
+      lock.show();
     }

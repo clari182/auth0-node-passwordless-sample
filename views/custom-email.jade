@@ -1,7 +1,7 @@
 extends layout
 
 block scripts
-  script(src='https://cdn.auth0.com/js/auth0/8.8.0/auth0.min.js')
+  script(src='https://cdn.auth0.com/js/auth0/8.9.3/auth0.min.js')
 
 block content
   h4 Login using a one time code via email, using your own custom UI
@@ -26,7 +26,7 @@ block content
       responseType: 'code'
     });
     
-    function sendEmail(){
+    function sendEmail() {
       var email = $('input.email').val();
       webAuth.passwordlessStart({
         connection: 'email',
@@ -42,14 +42,15 @@ block content
       });
     };
     
-    function login(){
+    function login() {
       var email = $('input.email').val();
       var code = $('input.code').val();
-      webAuth.passwordlessVerify({
+      webAuth.passwordlessLogin({
         connection: 'email',
         email: email,
         verificationCode: code
-      }, function (err,res) {
-        // handle errors or continue
+      }, function (err) {
+        // handle errors
+        console.error(err);
       });
     };

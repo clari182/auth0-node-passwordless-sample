@@ -1,7 +1,7 @@
 extends layout
 
 block scripts
-  script(src='https://cdn.auth0.com/js/auth0/8.8.0/auth0.min.js')
+  script(src='https://cdn.auth0.com/js/auth0/8.9.3/auth0.min.js')
 
 block content
   h4 Login using a magic link sent via email, using your own custom UI
@@ -20,13 +20,13 @@ block content
       responseType: 'code'
     });
     
-    function sendEmail(){
+    function sendEmail() {
       var email = $('input.email').val();
       webAuth.passwordlessStart({
         connection: 'email',
         send: 'link',
         email: email
-      }, function(err,res) {
+      }, function(err) {
         if (err) {
           alert('error sending email: '+ err.error_description);
           return;

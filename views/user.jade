@@ -11,24 +11,7 @@ block content
       |Profile 
     .panel-body
       dl.dl-horizontal
-        if (user.email)
-          dt email
-          dd #{user.email} &nbsp;
-            if (user.email_verified)
-              span.label.label-success verified
-            else
-              span.label.label-danger not verified
-        if (user.phone_number)
-          dt phone_number
-          dd #{user.phone_number} &nbsp;
-            if (user.phone_verified)
-              span.label.label-success verified
-            else
-              span.label.label-danger not verified
         +description('name',user.name)
-        +description('provider',provider)
-        +description('user_id',user.user_id)
+        +description('user_id',user.sub)
         +description('nickname',user.nickname)
-        +description('created_at',user.created_at)
-        +description('user_metadata',JSON.stringify(user.user_metadata,null,4))
-        +description('app_metadata',JSON.stringify(user.app_metadata,null,4))
+        +description('updated_at',user.updated_at)

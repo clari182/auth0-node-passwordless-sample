@@ -46,7 +46,6 @@ block content
     function loginEmailCode() {
       var lock = new Auth0LockPasswordless('#{env.AUTH0_CLIENT_ID}', '#{env.AUTH0_DOMAIN}', {
         oidcConformant: true,
-        allowedConnections: ['email', 'acme'],
         passwordlessMethod: 'code',
         auth: {
           redirectUrl: '#{env.AUTH0_CALLBACK_URL}',
@@ -62,7 +61,6 @@ block content
     function loginEmailLink() {
       var lock = new Auth0LockPasswordless('#{env.AUTH0_CLIENT_ID}', '#{env.AUTH0_DOMAIN}', {
         oidcConformant: true,
-        allowedConnections: ['email', 'acme'],
         passwordlessMethod: 'link',
         auth: {
           redirectUrl: '#{env.AUTH0_CALLBACK_URL}',
